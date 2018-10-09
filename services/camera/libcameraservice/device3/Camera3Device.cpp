@@ -344,12 +344,7 @@ status_t Camera3Device::initializeCommonLocked() {
     mIsInputStreamMultiResolution = false;
 
     // Measure the clock domain offset between camera and video/hw_composer
-    camera_metadata_entry timestampSource =
-            mDeviceInfo.find(ANDROID_SENSOR_INFO_TIMESTAMP_SOURCE);
-    if (timestampSource.count > 0 && timestampSource.data.u8[0] ==
-            ANDROID_SENSOR_INFO_TIMESTAMP_SOURCE_REALTIME) {
-        mTimestampOffset = getMonoToBoottimeOffset();
-    }
+    mTimestampOffset = getMonoToBoottimeOffset();
 
     // Will the HAL be sending in early partial result metadata?
     camera_metadata_entry partialResultsCount =
